@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import db from './mock/db.json';
+import { TChartDataList } from './types';
+import { formatChartData, fetchChartData } from './utils/chartData';
+import Chart from './components/Chart';
 
 function App() {
-  return <div className='App'>Hello TypeScript</div>;
+  const [chartDataList, setChartDataList] = useState<TChartDataList>([]);
+
+  useEffect(() => {
+    const response = fetchChartData(db);
+    const responseList = formatChartData(response);
+
+    setChartDataList(responseList);
+  }, []);
+
+  return <Chart chartDataList={chartDataList} />;
 }
 
 export default App;
