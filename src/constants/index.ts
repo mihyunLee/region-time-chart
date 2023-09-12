@@ -1,5 +1,5 @@
 import { ChartOptions } from 'chart.js';
-import { IDataPoint } from '../types';
+import { IChartData } from '../types';
 
 export const LABELS = {
   BAR: 'value_bar',
@@ -32,7 +32,7 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
       callbacks: {
         title: function (context) {
           const dataIndex = context[0].dataIndex;
-          const dataPoint = context[0].dataset.data[dataIndex] as unknown as IDataPoint;
+          const dataPoint = context[0].dataset.data[dataIndex] as unknown as IChartData;
           const { id, dateTime } = dataPoint;
 
           return `Date: ${dateTime}\nId: ${id}`;

@@ -1,22 +1,22 @@
-export interface IChartDataItem {
+export interface IChartDatabaseItem {
   id: string;
   value_area: number;
   value_bar: number;
 }
 
-export interface IChartData {
-  [key: string]: IChartDataItem;
+export interface IChartDatabaseResponse {
+  [key: string]: IChartDatabaseItem;
 }
 
-export type TChartDataList = IChartData[];
+export type TChartDataList = IChartDatabaseResponse[];
 
-export interface IChartdb {
+export interface IChartDatabase {
   type: string;
   version: number;
-  response: IChartData;
+  response: IChartDatabaseResponse;
 }
 
-export interface IDataPoint {
+export interface IChartData {
   id: string;
   dateTime: string;
   data: number;
@@ -24,6 +24,6 @@ export interface IDataPoint {
 
 export interface IChartDataProps {
   labels: string[];
-  barData: IDataPoint[];
-  areaData: IDataPoint[];
+  barData: IChartData[];
+  areaData: IChartData[];
 }

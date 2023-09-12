@@ -1,6 +1,6 @@
-import { IChartDataProps, IChartdb, TChartDataList } from '../../types';
+import { IChartDataProps, IChartDatabase, TChartDataList } from '../../types';
 
-export const fetchChartData = <T extends IChartdb>(chartData: T): T['response'] => {
+export const fetchChartData = <T extends IChartDatabase>(chartData: T): T['response'] => {
   const response = chartData.response;
 
   return response;
