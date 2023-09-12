@@ -15,3 +15,9 @@ export interface IChartdb {
   version: number;
   response: IChartData;
 }
+
+export interface IDataPoint {
+  id: string;
+  dateTime: string;
+  data: number;
+}

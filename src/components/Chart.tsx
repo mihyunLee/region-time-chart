@@ -14,7 +14,7 @@ import {
   Filler,
 } from 'chart.js';
 import { Chart as ReactChartJS } from 'react-chartjs-2';
-import { TChartDataList } from '../types';
+import { IDataPoint, TChartDataList } from '../types';
 import { CHART_TYPE, LABELS, TIME_SERIES_CHART_OPTIONS } from '../constants';
 
 ChartJS.register(
@@ -37,20 +37,20 @@ interface IProps {
 
 interface IData {
   labels: string[];
-  barData: number[];
-  areaData: number[];
+  barData: IDataPoint[];
+  areaData: IDataPoint[];
 }
 
 export default function Chart({ chartDataList }: IProps) {
   const initialData: IData = { labels: [], barData: [], areaData: [] };
 
   const { labels, barData, areaData } = chartDataList.reduce((acc, chartData) => {
-    const key = Object.keys(chartData)[0].split(' ');
+    const key = Object.keys(chartData)[0];
     const values = Object.values(chartData)[0];
 
-    acc.labels.push(key[1]);
-    acc.barData.push(values.value_bar);
-    acc.areaData.push(values.value_area);
+    acc.labels.push(key);
+    acc.barData.push({ dateTime: key, id: values.id, data: values.value_bar });
+    acc.areaData.push({ dateTime: key, id: values.id, data: values.value_area });
 
     return acc;
   }, initialData);
@@ -62,6 +62,10 @@ export default function Chart({ chartDataList }: IProps) {
         type: 'bar' as const,
         label: LABELS.BAR,
         data: barData,
+        parsing: {
+          xAxisKey: 'dateTime',
+          yAxisKey: 'data',
+        },
         borderColor: 'rgb(54, 162, 235)',
         borderWidth: 2,
         yAxisID: CHART_TYPE.BAR,
@@ -70,6 +74,10 @@ export default function Chart({ chartDataList }: IProps) {
         type: 'line' as const,
         label: LABELS.AREA,
         data: areaData,
+        parsing: {
+          xAxisKey: 'dateTime',
+          yAxisKey: 'data',
+        },
         borderColor: 'red',
         backgroundColor: 'rgb(255, 99, 132)',
         fill: true,

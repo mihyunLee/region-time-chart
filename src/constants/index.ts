@@ -1,4 +1,5 @@
 import { ChartOptions } from 'chart.js';
+import { IDataPoint } from '../types';
 
 export const LABELS = {
   BAR: 'value_bar',
@@ -28,6 +29,15 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
     tooltip: {
       mode: TOOLTIP_OPTIONS.MODE,
       intersect: TOOLTIP_OPTIONS.INTERSECT,
+      callbacks: {
+        title: function (context) {
+          const dataIndex = context[0].dataIndex;
+          const dataPoint = context[0].dataset.data[dataIndex] as unknown as IDataPoint;
+          const { id, dateTime } = dataPoint;
+
+          return `Date: ${dateTime}\nId: ${id}`;
+        },
+      },
     },
   },
   scales: {
