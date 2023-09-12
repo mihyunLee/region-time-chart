@@ -13,7 +13,7 @@ export const TOOLTIP_OPTIONS = {
 
 export const CHART_TYPE = {
   BAR: 'bar',
-  ARIA: 'aria',
+  AREA: 'area',
 } as const;
 
 export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
@@ -53,13 +53,13 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
         stepSize: 5000,
       },
     },
-    [CHART_TYPE.ARIA]: {
+    [CHART_TYPE.AREA]: {
       type: 'linear' as const,
       display: true,
       position: 'left' as const,
       title: {
         display: true,
-        text: CHART_TYPE.ARIA,
+        text: CHART_TYPE.AREA,
       },
       max: 200,
       ticks: {

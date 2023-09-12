@@ -54,7 +54,7 @@ export default function Chart({ chartDataList }: IProps) {
         backgroundColor: 'rgb(255, 99, 132)',
         fill: true,
         lineTension: 0.6,
-        yAxisID: CHART_TYPE.ARIA,
+        yAxisID: CHART_TYPE.AREA,
       },
       {
         type: 'bar' as const,
