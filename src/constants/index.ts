@@ -49,6 +49,9 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
         display: true,
         text: CHART_TYPE.BAR,
       },
+      ticks: {
+        stepSize: 5000,
+      },
     },
     [CHART_TYPE.ARIA]: {
       type: 'linear' as const,
