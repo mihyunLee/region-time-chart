@@ -21,3 +21,9 @@ export interface IDataPoint {
   dateTime: string;
   data: number;
 }
+
+export interface IChartDataProps {
+  labels: string[];
+  barData: IDataPoint[];
+  areaData: IDataPoint[];
+}

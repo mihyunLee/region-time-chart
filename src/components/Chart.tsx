@@ -14,8 +14,9 @@ import {
   Filler,
 } from 'chart.js';
 import { Chart as ReactChartJS } from 'react-chartjs-2';
-import { IDataPoint, TChartDataList } from '../types';
+import { TChartDataList } from '../types';
 import { CHART_TYPE, LABELS, TIME_SERIES_CHART_OPTIONS } from '../constants';
+import { formatChartData } from '../utils/chartData';
 
 ChartJS.register(
   LinearScale,
@@ -35,25 +36,8 @@ interface IProps {
   chartDataList: TChartDataList;
 }
 
-interface IData {
-  labels: string[];
-  barData: IDataPoint[];
-  areaData: IDataPoint[];
-}
-
 export default function Chart({ chartDataList }: IProps) {
-  const initialData: IData = { labels: [], barData: [], areaData: [] };
-
-  const { labels, barData, areaData } = chartDataList.reduce((acc, chartData) => {
-    const key = Object.keys(chartData)[0];
-    const values = Object.values(chartData)[0];
-
-    acc.labels.push(key);
-    acc.barData.push({ dateTime: key, id: values.id, data: values.value_bar });
-    acc.areaData.push({ dateTime: key, id: values.id, data: values.value_area });
-
-    return acc;
-  }, initialData);
+  const { labels, barData, areaData } = formatChartData(chartDataList);
 
   const chartData = {
     labels: labels,

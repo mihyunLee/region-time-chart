@@ -1,4 +1,4 @@
-import { IChartdb } from '../../types';
+import { IChartDataProps, IChartdb, TChartDataList } from '../../types';
 
 export const fetchChartData = <T extends IChartdb>(chartData: T): T['response'] => {
   const response = chartData.response;
@@ -6,7 +6,7 @@ export const fetchChartData = <T extends IChartdb>(chartData: T): T['response'] 
   return response;
 };
 
-export const formatChartData = <T>(response: T): T[] => {
+export const formatResponseData = <T>(response: T): T[] => {
   const responseList = [];
 
   for (const key in response) {
@@ -18,4 +18,21 @@ export const formatChartData = <T>(response: T): T[] => {
   }
 
   return responseList;
+};
+
+export const formatChartData = (chartDataList: TChartDataList) => {
+  const initialData: IChartDataProps = { labels: [], barData: [], areaData: [] };
+
+  const { labels, barData, areaData } = chartDataList.reduce((acc, chartData) => {
+    const key = Object.keys(chartData)[0];
+    const values = Object.values(chartData)[0];
+
+    acc.labels.push(key);
+    acc.barData.push({ dateTime: key, id: values.id, data: values.value_bar });
+    acc.areaData.push({ dateTime: key, id: values.id, data: values.value_area });
+
+    return acc;
+  }, initialData);
+
+  return { labels, barData, areaData };
 };

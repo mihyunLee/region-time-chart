@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import db from './mock/db.json';
 import { TChartDataList } from './types';
-import { formatChartData, fetchChartData } from './utils/chartData';
+import { formatResponseData, fetchChartData } from './utils/chartData';
 import Chart from './components/Chart';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     const response = fetchChartData(db);
-    const responseList = formatChartData(response);
+    const responseList = formatResponseData(response);
 
     setChartDataList(responseList);
   }, []);
