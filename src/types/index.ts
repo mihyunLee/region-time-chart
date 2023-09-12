@@ -24,6 +24,7 @@ export interface IChartData {
 
 export interface IChartDataProps {
   labels: string[];
+  ids: string[];
   barData: IChartData[];
   areaData: IChartData[];
 }

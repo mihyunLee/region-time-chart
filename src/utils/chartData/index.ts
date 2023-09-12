@@ -21,18 +21,19 @@ export const formatResponseData = <T>(response: T): T[] => {
 };
 
 export const formatChartData = (chartDataList: TChartDataList) => {
-  const initialData: IChartDataProps = { labels: [], barData: [], areaData: [] };
+  const initialData: IChartDataProps = { labels: [], ids: [], barData: [], areaData: [] };
 
-  const { labels, barData, areaData } = chartDataList.reduce((acc, chartData) => {
+  const { labels, ids, barData, areaData } = chartDataList.reduce((acc, chartData) => {
     const key = Object.keys(chartData)[0];
     const values = Object.values(chartData)[0];
 
     acc.labels.push(key);
+    acc.ids.push(values.id);
     acc.barData.push({ dateTime: key, id: values.id, data: values.value_bar });
     acc.areaData.push({ dateTime: key, id: values.id, data: values.value_area });
 
     return acc;
   }, initialData);
 
-  return { labels, barData, areaData };
+  return { labels, ids, barData, areaData };
 };
