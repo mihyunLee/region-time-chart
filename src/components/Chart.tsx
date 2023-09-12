@@ -59,18 +59,6 @@ export default function Chart({ chartDataList }: IProps) {
     labels: labels,
     datasets: [
       {
-        type: 'bar' as const,
-        label: LABELS.BAR,
-        data: barData,
-        parsing: {
-          xAxisKey: 'dateTime',
-          yAxisKey: 'data',
-        },
-        borderColor: 'rgb(54, 162, 235)',
-        borderWidth: 2,
-        yAxisID: CHART_TYPE.BAR,
-      },
-      {
         type: 'line' as const,
         label: LABELS.AREA,
         data: areaData,
@@ -83,6 +71,18 @@ export default function Chart({ chartDataList }: IProps) {
         fill: true,
         lineTension: 0.6,
         yAxisID: CHART_TYPE.ARIA,
+      },
+      {
+        type: 'bar' as const,
+        label: LABELS.BAR,
+        data: barData,
+        parsing: {
+          xAxisKey: 'dateTime',
+          yAxisKey: 'data',
+        },
+        borderColor: 'rgb(54, 162, 235)',
+        borderWidth: 2,
+        yAxisID: CHART_TYPE.BAR,
       },
     ],
   };

@@ -66,11 +66,22 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
     x: {
       ticks: {
         callback: function (val, index) {
-          if (typeof val === 'number' && index % 7 === 1) {
-            return this.getLabelForValue(val);
+          if (typeof val === 'number') {
+            const [date, time] = this.getLabelForValue(val).split(' ');
+
+            if (index === 1) {
+              return `${date}일자\n${time}`;
+            } else if (index % 7 === 1) {
+              return time;
+            } else {
+              return '';
+            }
           } else {
             return '';
           }
+        },
+        font: {
+          size: 14,
         },
       },
     },
