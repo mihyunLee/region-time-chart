@@ -37,7 +37,7 @@ interface IProps {
 }
 
 export default function Chart({ chartDataList }: IProps) {
-  const { labels, barData, areaData } = formatChartData(chartDataList);
+  const { labels, chartData: data } = formatChartData(chartDataList);
 
   const chartData = {
     labels: labels,
@@ -45,10 +45,10 @@ export default function Chart({ chartDataList }: IProps) {
       {
         type: 'line' as const,
         label: LABELS.AREA,
-        data: areaData,
+        data: data,
         parsing: {
           xAxisKey: 'dateTime',
-          yAxisKey: 'data',
+          yAxisKey: `data.${CHART_TYPE.AREA}`,
         },
         borderColor: 'red',
         backgroundColor: 'rgb(255, 99, 132)',
@@ -59,10 +59,10 @@ export default function Chart({ chartDataList }: IProps) {
       {
         type: 'bar' as const,
         label: LABELS.BAR,
-        data: barData,
+        data: data,
         parsing: {
           xAxisKey: 'dateTime',
-          yAxisKey: 'data',
+          yAxisKey: `data.${CHART_TYPE.BAR}`,
         },
         borderColor: 'rgb(54, 162, 235)',
         borderWidth: 2,

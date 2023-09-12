@@ -1,3 +1,4 @@
+import { CHART_TYPE, LABELS } from './../../constants/index';
 import { IChartDataProps, IChartDatabase, TChartDataList } from '../../types';
 
 export const fetchChartData = <T extends IChartDatabase>(chartData: T): T['response'] => {
@@ -21,19 +22,22 @@ export const formatResponseData = <T>(response: T): T[] => {
 };
 
 export const formatChartData = (chartDataList: TChartDataList) => {
-  const initialData: IChartDataProps = { labels: [], ids: [], barData: [], areaData: [] };
+  const initialData: IChartDataProps = { labels: [], ids: [], chartData: [] };
 
-  const { labels, ids, barData, areaData } = chartDataList.reduce((acc, chartData) => {
+  const { labels, ids, chartData } = chartDataList.reduce((acc, chartData) => {
     const key = Object.keys(chartData)[0];
     const values = Object.values(chartData)[0];
 
     acc.labels.push(key);
     acc.ids.push(values.id);
-    acc.barData.push({ dateTime: key, id: values.id, data: values.value_bar });
-    acc.areaData.push({ dateTime: key, id: values.id, data: values.value_area });
+    acc.chartData.push({
+      dateTime: key,
+      id: values.id,
+      data: { [CHART_TYPE.BAR]: values[LABELS.BAR], [CHART_TYPE.AREA]: values[LABELS.AREA] },
+    });
 
     return acc;
   }, initialData);
 
-  return { labels, ids, barData, areaData };
+  return { labels, ids, chartData };
 };

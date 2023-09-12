@@ -1,3 +1,4 @@
+import { CHART_TYPE } from './../constants/index';
 export interface IChartDatabaseItem {
   id: string;
   value_area: number;
@@ -19,12 +20,11 @@ export interface IChartDatabase {
 export interface IChartData {
   id: string;
   dateTime: string;
-  data: number;
+  data: { [CHART_TYPE.BAR]: number; [CHART_TYPE.AREA]: number };
 }
 
 export interface IChartDataProps {
   labels: string[];
   ids: string[];
-  barData: IChartData[];
-  areaData: IChartData[];
+  chartData: IChartData[];
 }
