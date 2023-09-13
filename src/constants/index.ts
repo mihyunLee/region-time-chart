@@ -41,12 +41,22 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
       position: 'bottom' as const,
       labels: {
         usePointStyle: true,
+        color: 'white',
+        font: {
+          size: 14,
+        },
       },
     },
     tooltip: {
       mode: TOOLTIP_OPTIONS.MODE,
       intersect: TOOLTIP_OPTIONS.INTERSECT,
       usePointStyle: true,
+      titleFont: {
+        size: 15,
+      },
+      bodyFont: {
+        size: 15,
+      },
       callbacks: {
         title: function (context) {
           const dataIndex = context[0].dataIndex;
@@ -66,6 +76,7 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
       title: {
         display: true,
         text: CHART_TYPE.BAR,
+        color: 'white',
       },
       ticks: {
         stepSize: 5000,
@@ -79,6 +90,7 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
       title: {
         display: true,
         text: CHART_TYPE.AREA,
+        color: 'white',
       },
       max: 200,
       ticks: {

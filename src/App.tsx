@@ -52,6 +52,6 @@ const HeaderContainer = styled.header`
 const ChartContainer = styled.article`
   canvas {
     width: 100%;
-    height: 80vh;
+    height: 70vh;
   }
 `;
