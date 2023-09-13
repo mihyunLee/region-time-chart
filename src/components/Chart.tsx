@@ -15,7 +15,7 @@ import {
 } from 'chart.js';
 import { Chart as ReactChartJS } from 'react-chartjs-2';
 import { TChartDataList } from '../types';
-import { CHART_COLOR, CHART_TYPE, LABELS, TIME_SERIES_CHART_OPTIONS } from '../constants';
+import { AXIS_KEY, CHART_COLOR, CHART_TYPE, LABELS, TIME_SERIES_CHART_OPTIONS } from '../constants';
 import { formatChartData } from '../utils/chartData';
 import { setBackgroundForBar } from '../utils/setBackgroundForBar';
 
@@ -49,8 +49,8 @@ export default function Chart({ chartDataList, selectedId }: IProps) {
         label: LABELS.AREA,
         data: data,
         parsing: {
-          xAxisKey: 'dateTime',
-          yAxisKey: `data.${CHART_TYPE.AREA}`,
+          xAxisKey: AXIS_KEY.X,
+          yAxisKey: AXIS_KEY.Y.AREA,
         },
         borderColor: 'red',
         backgroundColor: CHART_COLOR.PINK,
@@ -63,8 +63,8 @@ export default function Chart({ chartDataList, selectedId }: IProps) {
         label: LABELS.BAR,
         data: data,
         parsing: {
-          xAxisKey: 'dateTime',
-          yAxisKey: `data.${CHART_TYPE.BAR}`,
+          xAxisKey: AXIS_KEY.X,
+          yAxisKey: AXIS_KEY.Y.BAR,
         },
         backgroundColor: setBackgroundForBar({
           selectedId,
