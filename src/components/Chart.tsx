@@ -15,8 +15,9 @@ import {
 } from 'chart.js';
 import { Chart as ReactChartJS } from 'react-chartjs-2';
 import { TChartDataList } from '../types';
-import { CHART_TYPE, LABELS, TIME_SERIES_CHART_OPTIONS } from '../constants';
+import { CHART_COLOR, CHART_TYPE, LABELS, TIME_SERIES_CHART_OPTIONS } from '../constants';
 import { formatChartData } from '../utils/chartData';
+import { setBackgroundForBar } from '../utils/setBackgroundForBar';
 
 ChartJS.register(
   LinearScale,
@@ -34,9 +35,10 @@ ChartJS.register(
 
 interface IProps {
   chartDataList: TChartDataList;
+  selectedId: string;
 }
 
-export default function Chart({ chartDataList }: IProps) {
+export default function Chart({ chartDataList, selectedId }: IProps) {
   const { labels, chartData: data } = formatChartData(chartDataList);
 
   const chartData = {
@@ -51,7 +53,7 @@ export default function Chart({ chartDataList }: IProps) {
           yAxisKey: `data.${CHART_TYPE.AREA}`,
         },
         borderColor: 'red',
-        backgroundColor: 'rgb(255, 99, 132)',
+        backgroundColor: CHART_COLOR.PINK,
         fill: true,
         lineTension: 0.6,
         yAxisID: CHART_TYPE.AREA,
@@ -64,7 +66,11 @@ export default function Chart({ chartDataList }: IProps) {
           xAxisKey: 'dateTime',
           yAxisKey: `data.${CHART_TYPE.BAR}`,
         },
-        borderColor: 'rgb(54, 162, 235)',
+        backgroundColor: setBackgroundForBar({
+          selectedId,
+          selectedColor: CHART_COLOR.BLUE,
+          defaultColor: CHART_COLOR.BLUEALPHA,
+        }),
         borderWidth: 2,
         yAxisID: CHART_TYPE.BAR,
       },

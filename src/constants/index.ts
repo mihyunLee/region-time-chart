@@ -16,6 +16,12 @@ export const CHART_TYPE = {
   AREA: 'area',
 } as const;
 
+export const CHART_COLOR = {
+  BLUE: 'rgb(54, 162, 235)',
+  BLUEALPHA: 'rgba(54,162, 235, 0.3)',
+  PINK: 'rgb(255, 99, 132)',
+};
+
 export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
   responsive: true,
   plugins: {
