@@ -4,6 +4,7 @@ import { TChartDataList } from './types';
 import { formatResponseData, fetchChartData } from './utils/chartData';
 import Chart from './components/Chart';
 import FilterTabs from './components/FilterTabs';
+import GlobalStyle from './styles/GlobalStyle';
 
 function App() {
   const [chartDataList, setChartDataList] = useState<TChartDataList>([]);
@@ -18,8 +19,9 @@ function App() {
 
   return (
     <>
+      <GlobalStyle />
       <FilterTabs chartDataList={chartDataList} setSelectedId={setSelectedId} />
-      <Chart chartDataList={chartDataList} selectedId={selectedId} setSelectedId={setSelectedId} />;
+      <Chart chartDataList={chartDataList} selectedId={selectedId} setSelectedId={setSelectedId} />
     </>
   );
 }
