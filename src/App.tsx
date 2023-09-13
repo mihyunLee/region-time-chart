@@ -5,8 +5,10 @@ import { formatResponseData, fetchChartData } from './utils/chartData';
 import Chart from './components/Chart';
 import FilterTabs from './components/FilterTabs';
 import GlobalStyle from './styles/GlobalStyle';
+import Header from './components/Header';
+import styled from 'styled-components';
 
-function App() {
+export default function App() {
   const [chartDataList, setChartDataList] = useState<TChartDataList>([]);
   const [selectedId, setSelectedId] = useState<string>('');
 
@@ -20,10 +22,18 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <FilterTabs chartDataList={chartDataList} setSelectedId={setSelectedId} />
+      <HeaderContainer>
+        <Header>서울특별시 자치구별 시계열 차트</Header>
+        <FilterTabs chartDataList={chartDataList} setSelectedId={setSelectedId} />
+      </HeaderContainer>
       <Chart chartDataList={chartDataList} selectedId={selectedId} setSelectedId={setSelectedId} />
     </>
   );
 }
 
-export default App;
+const HeaderContainer = styled.header`
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  margin: 36px 18px;
+`;
