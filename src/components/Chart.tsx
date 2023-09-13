@@ -10,6 +10,8 @@ import {
   Tooltip,
   Title,
   Filler,
+  LineController,
+  BarController,
 } from 'chart.js';
 import { Chart as ReactChartJS, getElementAtEvent } from 'react-chartjs-2';
 import { TChartDataList } from '../types';
@@ -27,6 +29,8 @@ ChartJS.register(
   Tooltip,
   Title,
   Filler,
+  LineController,
+  BarController,
 );
 
 interface IProps {
