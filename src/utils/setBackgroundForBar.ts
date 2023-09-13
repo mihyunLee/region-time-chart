@@ -1,5 +1,6 @@
 import { ScriptableContext } from 'chart.js';
 import { IChartData } from '../types';
+import { FILITER_INIT_TEXT } from '../constants';
 
 interface IParameter {
   selectedId: string;
@@ -15,8 +16,7 @@ export function setBackgroundForBar({ selectedId, selectedColor, defaultColor }:
     switch (selectedId) {
       case contextRawId:
         return selectedColor;
-      case '':
-      case '필터 초기화':
+      case FILITER_INIT_TEXT:
         return selectedColor;
       default:
         return defaultColor;

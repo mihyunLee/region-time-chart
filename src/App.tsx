@@ -7,10 +7,11 @@ import FilterTabs from './components/FilterTabs';
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './components/Header';
 import styled from 'styled-components';
+import { FILITER_INIT_TEXT } from './constants';
 
 export default function App() {
   const [chartDataList, setChartDataList] = useState<TChartDataList>([]);
-  const [selectedId, setSelectedId] = useState<string>('');
+  const [selectedId, setSelectedId] = useState<string>(FILITER_INIT_TEXT);
 
   useEffect(() => {
     const response = fetchChartData(db);
@@ -24,7 +25,11 @@ export default function App() {
       <GlobalStyle />
       <HeaderContainer>
         <Header>서울특별시 자치구별 시계열 차트</Header>
-        <FilterTabs chartDataList={chartDataList} setSelectedId={setSelectedId} />
+        <FilterTabs
+          chartDataList={chartDataList}
+          selectedId={selectedId}
+          setSelectedId={setSelectedId}
+        />
       </HeaderContainer>
       <ChartContainer>
         <Chart

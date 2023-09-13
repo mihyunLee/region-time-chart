@@ -2,23 +2,25 @@ import React from 'react';
 import { TChartDataList } from '../types';
 import { formatChartData } from '../utils/chartData';
 import styled from 'styled-components';
+import { FILITER_INIT_TEXT } from '../constants';
 
 interface IProps {
   chartDataList: TChartDataList;
+  selectedId: string;
   setSelectedId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function FilterTabs({ chartDataList, setSelectedId }: IProps) {
+export default function FilterTabs({ chartDataList, selectedId, setSelectedId }: IProps) {
   const { ids } = formatChartData(chartDataList);
 
-  const newIds = ['필터 초기화', ...new Set(ids)];
+  const newIds = [FILITER_INIT_TEXT, ...new Set(ids)];
 
   return (
     <TabsBar>
       <TabList>
         {newIds.map((id, idx) => (
           <li key={idx}>
-            <TabButton type='button' onClick={() => setSelectedId(id)}>
+            <TabButton type='button' onClick={() => setSelectedId(id)} active={id === selectedId}>
               {id}
             </TabButton>
           </li>
@@ -38,12 +40,13 @@ const TabList = styled.ul`
   gap: 10px;
 `;
 
-const TabButton = styled.button`
+const TabButton = styled.button<{ active: boolean }>`
   padding: 10px 20px;
-  border: 2px solid var(--gray500);
+  border: 2px solid ${({ active }) => (active ? 'var(--blue)' : 'var(--gray500)')};
   border-radius: 48px;
   transition: all 0.2s;
-  color: var(--gray300);
+  background-color: ${({ active }) => active && `var(--blue)`};
+  color: ${({ active }) => (active ? 'var(--white)' : 'var(--gray300)')};
 
   &:focus {
     border: 2px solid var(--blue);

@@ -23,6 +23,8 @@ export const CHART_COLOR = {
   GREENPHA: 'rgba(36, 224, 188, 0.5)',
 } as const;
 
+export const FILITER_INIT_TEXT = '전체' as const;
+
 export const AXIS_KEY = {
   X: 'dateTime',
   Y: {
