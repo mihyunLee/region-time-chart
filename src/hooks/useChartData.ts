@@ -24,10 +24,12 @@ export default function useChartData(chartDataList: TChartDataList, selectedId: 
           xAxisKey: AXIS_KEY.X,
           yAxisKey: AXIS_KEY.Y.AREA,
         },
-        borderColor: 'red',
-        backgroundColor: CHART_COLOR.PINK,
+        borderColor: CHART_COLOR.GREEN,
+        backgroundColor: CHART_COLOR.GREENPHA,
         fill: true,
         yAxisID: CHART_TYPE.AREA,
+        tension: 0.4,
+        pointBorderWidth: 0,
       },
       {
         type: 'bar' as const,
@@ -42,7 +44,6 @@ export default function useChartData(chartDataList: TChartDataList, selectedId: 
           selectedColor: CHART_COLOR.BLUE,
           defaultColor: CHART_COLOR.BLUEALPHA,
         }),
-        borderWidth: 2,
         yAxisID: CHART_TYPE.BAR,
       },
     ],
@@ -50,7 +51,7 @@ export default function useChartData(chartDataList: TChartDataList, selectedId: 
 
   useEffect(() => {
     setChartData(dataConfig);
-  }, [selectedId]);
+  }, [chartDataList, selectedId]);
 
   return chartData;
 }

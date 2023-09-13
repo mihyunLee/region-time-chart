@@ -17,9 +17,10 @@ export const CHART_TYPE = {
 } as const;
 
 export const CHART_COLOR = {
-  BLUE: 'rgb(54, 162, 235)',
+  BLUE: 'rgb(51, 102, 255)',
   BLUEALPHA: 'rgba(54,162, 235, 0.3)',
-  PINK: 'rgb(255, 99, 132)',
+  GREEN: 'rgb(36, 224, 188)',
+  GREENPHA: 'rgba(36, 224, 188, 0.5)',
 } as const;
 
 export const AXIS_KEY = {
@@ -32,17 +33,18 @@ export const AXIS_KEY = {
 
 export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
-    title: {
-      display: true,
-      text: '지역별 시계열 차트',
-    },
     legend: {
       position: 'bottom' as const,
+      labels: {
+        usePointStyle: true,
+      },
     },
     tooltip: {
       mode: TOOLTIP_OPTIONS.MODE,
       intersect: TOOLTIP_OPTIONS.INTERSECT,
+      usePointStyle: true,
       callbacks: {
         title: function (context) {
           const dataIndex = context[0].dataIndex;
@@ -65,6 +67,7 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
       },
       ticks: {
         stepSize: 5000,
+        color: 'white',
       },
     },
     [CHART_TYPE.AREA]: {
@@ -78,6 +81,7 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
       max: 200,
       ticks: {
         stepSize: 50,
+        color: 'white',
       },
     },
     x: {
@@ -100,6 +104,7 @@ export const TIME_SERIES_CHART_OPTIONS: ChartOptions = {
         font: {
           size: 14,
         },
+        color: 'white',
       },
     },
   },

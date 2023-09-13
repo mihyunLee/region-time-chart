@@ -26,7 +26,13 @@ export default function App() {
         <Header>서울특별시 자치구별 시계열 차트</Header>
         <FilterTabs chartDataList={chartDataList} setSelectedId={setSelectedId} />
       </HeaderContainer>
-      <Chart chartDataList={chartDataList} selectedId={selectedId} setSelectedId={setSelectedId} />
+      <ChartContainer>
+        <Chart
+          chartDataList={chartDataList}
+          selectedId={selectedId}
+          setSelectedId={setSelectedId}
+        />
+      </ChartContainer>
     </>
   );
 }
@@ -36,4 +42,11 @@ const HeaderContainer = styled.header`
   align-items: center;
   gap: 48px;
   margin: 36px 18px;
+`;
+
+const ChartContainer = styled.article`
+  canvas {
+    width: 100%;
+    height: 80vh;
+  }
 `;
