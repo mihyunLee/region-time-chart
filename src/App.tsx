@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <FilterTabs chartDataList={chartDataList} setSelectedId={setSelectedId} />
-      <Chart chartDataList={chartDataList} selectedId={selectedId} />;
+      <Chart chartDataList={chartDataList} selectedId={selectedId} setSelectedId={setSelectedId} />;
     </>
   );
 }

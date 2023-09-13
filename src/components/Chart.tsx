@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import type { ChartData } from 'chart.js';
 import {
   Chart as ChartJS,
   LinearScale,
@@ -8,16 +9,15 @@ import {
   LineElement,
   Legend,
   Tooltip,
-  LineController,
-  BarController,
   Title,
   Filler,
 } from 'chart.js';
-import { Chart as ReactChartJS } from 'react-chartjs-2';
-import { TChartDataList } from '../types';
+import { Chart as ReactChartJS, getElementAtEvent } from 'react-chartjs-2';
+import { IChartData, TChartDataList } from '../types';
 import { AXIS_KEY, CHART_COLOR, CHART_TYPE, LABELS, TIME_SERIES_CHART_OPTIONS } from '../constants';
 import { formatChartData } from '../utils/chartData';
 import { setBackgroundForBar } from '../utils/setBackgroundForBar';
+import { getSelectedChartId } from '../utils/getSelectedChartId';
 
 ChartJS.register(
   LinearScale,
@@ -29,19 +29,18 @@ ChartJS.register(
   Tooltip,
   Title,
   Filler,
-  LineController,
-  BarController,
 );
 
 interface IProps {
   chartDataList: TChartDataList;
   selectedId: string;
+  setSelectedId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Chart({ chartDataList, selectedId }: IProps) {
+export default function Chart({ chartDataList, selectedId, setSelectedId }: IProps) {
   const { labels, chartData: data } = formatChartData(chartDataList);
 
-  const chartData = {
+  const chartData: ChartData<'bar' | 'line', IChartData[]> = {
     labels: labels,
     datasets: [
       {
@@ -55,7 +54,6 @@ export default function Chart({ chartDataList, selectedId }: IProps) {
         borderColor: 'red',
         backgroundColor: CHART_COLOR.PINK,
         fill: true,
-        lineTension: 0.6,
         yAxisID: CHART_TYPE.AREA,
       },
       {
@@ -77,5 +75,32 @@ export default function Chart({ chartDataList, selectedId }: IProps) {
     ],
   };
 
-  return <ReactChartJS type='bar' data={chartData} options={TIME_SERIES_CHART_OPTIONS} />;
+  // FIXME: useRef에 공식 문서와 같이 ChartJS 타입을 할당하면 타입 에러 발생
+  // 임시 처방으로 any 사용
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const chartRef = useRef<any>(null);
+
+  const filterId = (event: React.MouseEvent<HTMLCanvasElement>) => {
+    const { current: currentChartRef } = chartRef;
+
+    if (!currentChartRef) {
+      return;
+    }
+
+    const clickedChartId = getSelectedChartId(getElementAtEvent(currentChartRef, event), chartData);
+
+    if (clickedChartId) {
+      setSelectedId(clickedChartId);
+    }
+  };
+
+  return (
+    <ReactChartJS
+      ref={chartRef}
+      type='bar'
+      data={chartData}
+      options={TIME_SERIES_CHART_OPTIONS}
+      onClick={filterId}
+    />
+  );
 }
