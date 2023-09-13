@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
 		--gray300: #989AA1;
 		--blue: #3366FF;
 		--purple: #D4C5F9;
-		--warning: #F15846;
+		--alert: #41D3A7;
 		font-size: 16px;
 	}
 	body{

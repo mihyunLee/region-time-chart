@@ -26,13 +26,16 @@ export default function FilterTabs({ chartDataList, selectedId, setSelectedId }:
           </li>
         ))}
       </TabList>
+      <Message>* 상단의 자치구를 클릭하거나 그래프를 클릭하면 그래프가 필터링 됩니다 :D</Message>
     </TabsBar>
   );
 }
 
 const TabsBar = styled.nav`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  gap: 14px;
 `;
 
 const TabList = styled.ul`
@@ -53,4 +56,9 @@ const TabButton = styled.button<{ active: boolean }>`
     background-color: var(--blue);
     color: var(--white);
   }
+`;
+
+const Message = styled.span`
+  color: var(--alert);
+  font-size: 14px;
 `;
