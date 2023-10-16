@@ -201,7 +201,7 @@ export default function FilterTabs({ chartDataList, setSelectedId }: IProps) {
 }
 ```
 
-https://github.com/mihyunLee/region-time-chart/blob/5673838c58a0ac24c63760bdb77731b8a1ea39ab/src/components/FilterTabs.tsx#L13C1-L27C12
+https://github.com/mihyunLee/region-time-chart/blob/5673838c58a0ac24c63760bdb77731b8a1ea39ab/src/components/FilterTabs.tsx#L13-L32
 
 <b>💠 선택한 id에 따라 Bar Chart 배경색 변경하기</b>
 
@@ -209,7 +209,7 @@ https://github.com/mihyunLee/region-time-chart/blob/5673838c58a0ac24c63760bdb777
 > 선택한 id 값과, 선택되었을 때의 색상, 기본 색상을 매개변수로 받아 배경색을 설정하는 `setBackgroundForBar()` 유틸 함수를 만들었습니다. <br> 클릭한 `ctx`의 id 값과 선택한 id 값에 따라 배경색을 반환해주는 로직을 가지고 있습니다.
 > `ctx`의 타입은 Chart.js에서 제공하는 [ScriptableContext](https://www.chartjs.org/docs/latest/api/interfaces/ScriptableContext.html) 타입을 정의하고, 타입스크립트가 `raw` 프로퍼티의 타입 추론하지 못하여 타입 단언을 하게 되었습니다.
 
-https://github.com/mihyunLee/region-time-chart/blob/5673838c58a0ac24c63760bdb77731b8a1ea39ab/src/utils/setBackgroundForBar.ts#L11C1-L25
+https://github.com/mihyunLee/region-time-chart/blob/5673838c58a0ac24c63760bdb77731b8a1ea39ab/src/utils/setBackgroundForBar.ts#L11-L25
 
 <b>💠 특정 데이터 구역 클릭시 필터링 기능 구현</b>
 
